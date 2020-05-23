@@ -3,3 +3,4 @@ public class Car extends Vehicle {
         super(registrationNum, color);
     }
 }
+
