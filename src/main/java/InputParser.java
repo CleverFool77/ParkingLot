@@ -1,5 +1,6 @@
 import com.google.common.base.Splitter;
 import com.google.inject.AbstractModule;
+import com.google.inject.Inject;
 
 import java.util.List;
 import javax.annotation.Nullable;
@@ -8,9 +9,15 @@ import static com.google.common.base.Preconditions.checkPositionIndex;
 
 public class InputParser {
     private List<String> wordsOfInput;
-    private ParkingLot newLot = new ParkingLot(0);
+    private ParkingLot newLot;
+    private CarFactory factory;
 
-    public void getTheInputWords(@Nullable String input) {
+    @Inject
+    InputParser(ParkingLot newLot, CarFactory factory){
+        this.newLot = newLot;
+        this.factory = factory;
+    }
+    public void getTheInputWords(String input) {
         this.wordsOfInput = Splitter.on(' ').trimResults().omitEmptyStrings().splitToList(input);
     }
 
@@ -32,7 +39,11 @@ public class InputParser {
                         "IndexOufBound Error !!" + "Please provide both registration Number and color");
                 String registrationNum = this.wordsOfInput.get(1);
                 String color = this.wordsOfInput.get(2);
-                this.newLot.parkVehicle(registrationNum, color);
+                //System.out.println(registrationNum + "      " + color);
+                //System.out.println(factory);
+                Car car = factory.create(registrationNum, color);
+                //car.apply();
+                this.newLot.park(car);
                 break;
             case "leave":
                 checkPositionIndex(
@@ -66,18 +77,10 @@ public class InputParser {
                 this.newLot.slotNumsWithResistrationNum(regNumForSlotNum);
                 break;
             case "exit":
-                System.exit(1);
+                System.exit(0);
                 break;
             default:
                 System.out.println("Invalid Command !! GG");
-        }
-    }
-
-    public static class CarModule extends AbstractModule {
-
-        @Override
-        protected void configure() {
-            bind(Vehicle.class).to(Car.class);
         }
     }
 }
