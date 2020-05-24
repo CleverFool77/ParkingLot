@@ -3,6 +3,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -11,16 +12,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-public class ParkingLot {
+@Singleton
+public class ParkingLot implements AbstractParkingLot{
     private Integer capacitySize;
     private ArrayList<Integer> emptySlots;
-    private HashBiMap<Integer, Car> assignCarsToSlots;
+    private HashBiMap<Integer, Vehicle> assignVehicleToSlots;
 
     @Inject
     public ParkingLot(Integer capacitySize) {
         this.capacitySize = checkNotNull(capacitySize);
         this.emptySlots = Lists.newArrayList();
-        this.assignCarsToSlots =  HashBiMap.create();
+        this.assignVehicleToSlots =  HashBiMap.create();
     }
 
     public int getCapacitySize() {
@@ -31,8 +33,8 @@ public class ParkingLot {
         return this.emptySlots;
     }
 
-    public HashBiMap<Integer, Car> getAssignSlotsToCars() {
-        return this.getAssignSlotsToCars();
+    public HashBiMap<Integer, Vehicle> getAssignVehicleToSlots() {
+        return this.getAssignVehicleToSlots();
     }
 
     public void setCapacitySize(Integer capacitySize) {
@@ -43,8 +45,8 @@ public class ParkingLot {
         this.emptySlots = checkNotNull(emptySlots);
     }
 
-    public void setAssignSlotsToCars(HashBiMap<Integer, Car> assignSlotsToCars) {
-        this.assignCarsToSlots = checkNotNull(assignSlotsToCars);
+    public void setAssignVehicleToSlots(HashBiMap<Integer, Vehicle> assignVehicleToSlots) {
+        this.assignVehicleToSlots = checkNotNull(assignVehicleToSlots);
     }
 
     public void createParkingLot(Integer capacitySize) {
@@ -60,6 +62,7 @@ public class ParkingLot {
         }
     }
 
+    @Override
     public void parkVehicle(String registrationNum, String color) {
         if (this.capacitySize == 0) {
             System.out.println("Sorry, parking lot is not created yet");
@@ -70,28 +73,30 @@ public class ParkingLot {
         }
     }
 
+    @Override
     public void parkCar(String registrationNum, String color) {
         Collections.sort(this.emptySlots);
         Integer emptylot = this.emptySlots.get(0);
         Car newCar = new Car(registrationNum, color);
-        if  (!this.assignCarsToSlots.containsKey(emptylot)) {
-            this.assignCarsToSlots.put(emptylot, newCar);
+        if  (!this.assignVehicleToSlots.containsKey(emptylot)) {
+            this.assignVehicleToSlots.put(emptylot, newCar);
             System.out.println("Allocated slot number : " + emptylot);
             this.emptySlots.remove(0);
         }
     }
 
+    @Override
     public void unParkCar(Integer slotNumber) {
         System.out.println("I'm inside unpark");
         if (this.capacitySize == 0) {
             System.out.println("Parking lot is not created");
-        } else if (this.assignCarsToSlots.size() == 0) {
+        } else if (this.assignVehicleToSlots.size() == 0) {
             System.out.println("Parking lot is empty, LOL");
         } else { //  put one codntion to check if slot isnnot repsent in map at all
-            if (this.assignCarsToSlots.containsKey(slotNumber)) {
-                Car unparkthisCar = this.assignCarsToSlots.get(slotNumber);
+            if (this.assignVehicleToSlots.containsKey(slotNumber)) {
+                Vehicle unparkthisCar = this.assignVehicleToSlots.get(slotNumber);
                 if (unparkthisCar != null) {
-                    this.assignCarsToSlots.remove(slotNumber);
+                    this.assignVehicleToSlots.remove(slotNumber);
                     this.emptySlots.add(slotNumber);
                     System.out.println("Car at " + slotNumber + " is now unparked");
                 }
@@ -102,15 +107,16 @@ public class ParkingLot {
         }
     }
 
+    @Override
     public void registrationNumWithColor(String color) {
-        Collection<Car> carsList = this.assignCarsToSlots.values();
+        Collection<Vehicle> vehicleList = this.assignVehicleToSlots.values();
         ArrayList<String> registrationNumList = new ArrayList<>();
-        for (Car oneCar : carsList) {
-            if (oneCar.getColor().equals(color)) {
-                registrationNumList.add(oneCar.getRegistrationNum());
+        for (Vehicle oneVehicle : vehicleList) {
+            if (oneVehicle.getColor().equals(color)) {
+                registrationNumList.add(oneVehicle.getRegistrationNum());
             }
             if (registrationNumList.size() <= 0) {
-                System.out.println("No car or registration Number with " +
+                System.out.println("No Vehicle or registration Number with " +
                         "particular color is found");
             }
         }
@@ -119,17 +125,19 @@ public class ParkingLot {
         }
     }
 
+    @Override
     public void slotNumsWithResistrationNum(String registrationNum) {
-        this.assignCarsToSlots.forEach((key, value) -> {
+        this.assignVehicleToSlots.forEach((key, value) -> {
             if (value.getRegistrationNum().equals(registrationNum)) {
                 System.out.println("Slot Number " + key);
             }
         });
     }
 
+    @Override
     public void slotNumWithColor(String Color) {
         ArrayList<Integer> slotNumWithColorList = new ArrayList<>();
-        this.assignCarsToSlots.forEach((key, value) -> {
+        this.assignVehicleToSlots.forEach((key, value) -> {
             if (value.getColor().equals(Color)) {
                 slotNumWithColorList.add(key);
                 // System.out.println("Registration Number" + key);
@@ -140,8 +148,9 @@ public class ParkingLot {
         }
     }
 
+    @Override
     public void checkStatus() {
-        for (Map.Entry<Integer, Car> assignedLot : this.assignCarsToSlots.entrySet()) {
+        for (Map.Entry<Integer, Vehicle> assignedLot : this.assignVehicleToSlots.entrySet()) {
             System.out.println(assignedLot.getKey() + " "
                     + assignedLot.getValue().getRegistrationNum() + " "
                     + assignedLot.getValue().getColor());

@@ -1,7 +1,8 @@
 import com.google.common.base.Splitter;
-import com.google.common.collect.Lists;
-import java.util.List;
+import com.google.inject.AbstractModule;
 
+import java.util.List;
+import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkPositionIndex;
 
@@ -9,12 +10,12 @@ public class InputParser {
     private List<String> wordsOfInput;
     private ParkingLot newLot = new ParkingLot(0);
 
-    public void getTheInputWords(String input) {
+    public void getTheInputWords(@Nullable String input) {
         this.wordsOfInput = Splitter.on(' ').trimResults().omitEmptyStrings().splitToList(input);
     }
 
     public void inputDataParser() {
-        String query = checkNotNull(this.wordsOfInput.get(0));
+        String query = checkNotNull(this.wordsOfInput.get(0), "Invalid command !! Enter command");
         switch (query) {
             case "create_parking_lot":
                 checkPositionIndex(
@@ -69,6 +70,14 @@ public class InputParser {
                 break;
             default:
                 System.out.println("Invalid Command !! GG");
+        }
+    }
+
+    public static class CarModule extends AbstractModule {
+
+        @Override
+        protected void configure() {
+            bind(Vehicle.class).to(Car.class);
         }
     }
 }
