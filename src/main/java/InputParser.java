@@ -11,7 +11,6 @@ public class InputParser {
 
     public void getTheInputWords(String input) {
         this.wordsOfInput = Splitter.on(' ').trimResults().omitEmptyStrings().splitToList(input);
-        System.out.println(wordsOfInput);
     }
 
     public void inputDataParser() {

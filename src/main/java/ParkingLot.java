@@ -2,6 +2,8 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class ParkingLot {
     private ArrayList<Integer> emptySlots;
     private HashBiMap<Integer, Car> assignCarsToSlots;
 
+    @Inject
     public ParkingLot(Integer capacitySize) {
         this.capacitySize = checkNotNull(capacitySize);
         this.emptySlots = Lists.newArrayList();
