@@ -11,6 +11,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+/*
+* @class ParkingLot helps in
+* creating a parking lot
+* */
+@Singleton
 public class ParkingLotImpl implements ParkingLot{
     private Integer capacitySize;
     private ArrayList<Integer> emptySlots;
@@ -76,7 +81,6 @@ public class ParkingLotImpl implements ParkingLot{
         } else {
             return parkCar(car);
         }
-    System.out.println("dajkfjf");
         return -1;
     }
 
@@ -95,7 +99,6 @@ public class ParkingLotImpl implements ParkingLot{
 
     @Override
     public Integer unParkCar(Integer slotNumber) {
-        //System.out.println("I'm inside unpark");
         if (this.capacitySize == 0) {
             System.out.println("Parking lot is not created");
         } else if (this.assignCarToSlots.size() == 0) {

@@ -4,32 +4,23 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.junit.jupiter.api.DisplayName;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ParkingLotTester {
 
-    Injector injector = Guice.createInjector(new ParkingLotModule(),new CarModule());
+    Injector injector = Guice.createInjector(new ParkingLot.ParkingLotModule(),new InputParser.CarModule());
     @InjectMocks
     private ParkingLot newLot = injector.getInstance(ParkingLot.class);
 
     @Spy
     private Car car = new CarImpl("ABCD-EFGH-1234", "white");
-    //Car car = injector.getInstance(Car.class);
 
-    public ParkingLotTester() {
-
-    }
+    public ParkingLotTester() {}
 
     @Test
     @DisplayName("Test to create parking lot")

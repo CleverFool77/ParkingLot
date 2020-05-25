@@ -5,6 +5,12 @@ import com.google.inject.assistedinject.AssistedInject;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/*
+* @class  Car helps us create
+* an object of car that is
+* being parked in parking lot
+* */
+
 public class CarImpl implements Car {
     private String registrationNum = null;
     private String color = null;
@@ -13,7 +19,6 @@ public class CarImpl implements Car {
     public CarImpl(@Assisted("regNum") String registrationNum,@Assisted("color") String color) {
         this.registrationNum = registrationNum;
         this.color = color;
-        //System.out.println("kdjhfjfhsjf");
     }
 
     @Override

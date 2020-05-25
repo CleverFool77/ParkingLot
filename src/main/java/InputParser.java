@@ -1,13 +1,16 @@
 import com.google.common.base.Splitter;
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkPositionIndex;
 
+/* This class deals with further parsing of the input and
+*  helps in envking method based on command */
 public class InputParser {
     private List<String> wordsOfInput;
     private ParkingLot newLot;
@@ -45,10 +48,7 @@ public class InputParser {
                         "IndexOufBound Error !!" + "Please provide both registration Number and color");
                 String registrationNum = this.wordsOfInput.get(1);
                 String color = this.wordsOfInput.get(2);
-                //System.out.println(registrationNum + "      " + color);
-                //System.out.println(factory);
                 Car car = factory.create(registrationNum, color);
-                //car.apply();
                 Integer allotedSlot = this.newLot.park(car);
                 if(!allotedSlot.equals(-1)){
                     System.out.println("Alloted at " + allotedSlot);
@@ -109,6 +109,16 @@ public class InputParser {
                 break;
             default:
                 System.out.println("Invalid Command !! GG");
+        }
+    }
+
+    public static class CarModule extends AbstractModule {
+
+        @Override
+        protected void configure() {
+            install(new FactoryModuleBuilder()
+                    .implement(Car.class, CarImpl.class)
+                    .build(CarFactory.class));
         }
     }
 }

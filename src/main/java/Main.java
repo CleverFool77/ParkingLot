@@ -7,11 +7,24 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/*
+* <h1> Hello <h1>
+* Implementation of ParkingLot problem using Java, Google guice,
+* guava and tested using Junit-Mockito.
+* @author Lekhika Dugtal
+* */
+
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		Injector injector = Guice.createInjector(new ParkingLotModule(), new CarModule());
+		Injector injector = Guice.createInjector(new ParkingLot.ParkingLotModule(), new InputParser.CarModule());
 		InputParser inputParser = injector.getInstance(InputParser.class);
+
+		System.out.println("Hello !! \n" +
+				"To Futher Continue Press 1 or 2 \n" +
+				"1. File Method for input\n" +
+				"2. Interfactive Method");
+
 		while (true) {
 			Integer option = Integer.parseInt(scanner.nextLine());
 			switch (option) {
