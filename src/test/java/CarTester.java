@@ -19,7 +19,7 @@ public class CarTester {
     public void testGetRegistrationNum() {
         String actualOutput = car.getRegistrationNum();
         String expectedOutput = "ABCD-EFGH-1234";
-        Assert.assertSame(actualOutput, expectedOutput);
+        Assert.assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
@@ -27,7 +27,7 @@ public class CarTester {
     public void testGetColor() {
         String actualOutput = car.getColor();
         String expectedOutput = "white";
-        Assert.assertSame(actualOutput, expectedOutput);
+        Assert.assertEquals(actualOutput, expectedOutput);
     }
 
     @Test

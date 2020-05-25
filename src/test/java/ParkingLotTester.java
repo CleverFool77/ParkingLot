@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.junit.jupiter.api.DisplayName;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
@@ -19,34 +20,39 @@ import static org.mockito.Mockito.when;
 public class ParkingLotTester {
 
     Injector injector = Guice.createInjector(new ParkingLotModule(),new CarModule());
-
     @InjectMocks
-    ParkingLot newLot = injector.getInstance(ParkingLot.class);
+    private ParkingLot newLot = injector.getInstance(ParkingLot.class);
 
-    @Mock
-    Car car = new CarImpl("ABCD-EFGH-1234", "white");
+    @Spy
+    private Car car = new CarImpl("ABCD-EFGH-1234", "white");
     //Car car = injector.getInstance(Car.class);
+
+    public ParkingLotTester() {
+
+    }
 
     @Test
     @DisplayName("Test to create parking lot")
     public void testCreateParkingLot() {
         newLot.createParkingLot(1);
-        Assert.assertEquals(newLot.getCapacitySize(),1);
+        Assert.assertEquals(this.newLot.getCapacitySize(),1);
     }
 
     @Test
     @DisplayName("Test to Park")
     public void testParkCar(){
-        newLot.createParkingLot(1);
-        when(newLot.parkCar(car).toString()).thenReturn("Alloted at 1");
+        this.newLot.createParkingLot(1);
+        String actualOutput = this.newLot.parkCar(this.car).toString();
+        Assert.assertEquals(actualOutput, "1");
     }
 
     @Test
     @DisplayName("Test to Unpark")
     public void testUnPark(){
-        newLot.createParkingLot(1);
-        newLot.park(car);
-        when(newLot.unParkCar(1).toString()).thenReturn("1");
+        this.newLot.createParkingLot(1);
+        this.newLot.park(this.car);
+        String actualOutput = this.newLot.unParkCar(1).toString();
+        Assert.assertEquals(actualOutput, "1");
     }
 
     @Test
@@ -54,27 +60,28 @@ public class ParkingLotTester {
     public void teststatus() {
         newLot.createParkingLot(1);
         newLot.park(car);
-        when(newLot.checkStatus().toString()).thenReturn("1 ABCD-EFGH-1234 white");
+        String actualOutput = this.newLot.checkStatus().get(0).toString();
+        String expectedOutput = "1 ABCD-EFGH-1234 white";
+        Assert.assertEquals(actualOutput, expectedOutput);
     }
 
     @Test
     @DisplayName("Test to return registration Num on given color")
     public void testRegistrationNumWithColor() {
         newLot.createParkingLot(1);
-        newLot.park(car);
+        newLot.park(this.car);
         String regNum = newLot.registrationNumWithColor("white").get(0);
-        Assert.assertSame("1 ABCD-EFGH-1234 white", regNum);
+        Assert.assertEquals("ABCD-EFGH-1234", regNum);
     }
 
     @Test
     @DisplayName("Test to return Slot Number on given color")
     public void testSlotNumWithColor() {
         newLot.createParkingLot(1);
-        newLot.park(car);
-        System.out.println("skjhdjhjadkhd");
+        newLot.park(this.car);
         ArrayList<Integer> slot = newLot.slotNumWithColor("white");
         System.out.println(slot.get(0));
-        Assert.assertSame(1, slot.get(0));
+        Assert.assertEquals(slot.get(0).toString(), "1");
     }
 
 }
