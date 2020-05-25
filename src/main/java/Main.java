@@ -11,7 +11,7 @@ public class Main {
         InputParser inputParser = injector.getInstance(InputParser.class);
         while (true) {
             String inputLine = scanner.nextLine();
-            inputParser.getTheInputWords(inputLine);
+            inputParser.parseTheInputWords(inputLine);
             inputParser.inputDataParser();
         }
 

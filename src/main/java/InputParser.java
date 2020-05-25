@@ -19,8 +19,12 @@ public class InputParser {
         this.factory = factory;
     }
 
-    public void getTheInputWords(String input) {
+    public void parseTheInputWords(String input) {
         this.wordsOfInput = Splitter.on(' ').trimResults().omitEmptyStrings().splitToList(input);
+    }
+
+    public List<String> getTheInputWords() {
+        return this.wordsOfInput;
     }
 
     public void inputDataParser() {

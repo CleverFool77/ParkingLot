@@ -4,7 +4,7 @@ import org.junit.runner.notification.Failure;
 
 public class TestQueryRunner {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(ParkingLotTester.class);
+        Result result = JUnitCore.runClasses(ParkingLotTester.class, CarTester.class, InputParserTester.class);
 
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
