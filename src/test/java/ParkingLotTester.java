@@ -71,7 +71,9 @@ public class ParkingLotTester {
     public void testSlotNumWithColor() {
         newLot.createParkingLot(1);
         newLot.park(car);
+        System.out.println("skjhdjhjadkhd");
         ArrayList<Integer> slot = newLot.slotNumWithColor("white");
+        System.out.println(slot.get(0));
         Assert.assertSame(1, slot.get(0));
     }
 
