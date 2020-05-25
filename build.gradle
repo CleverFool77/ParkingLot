@@ -7,6 +7,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -14,5 +15,5 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '23.5-jre'
     compile group: 'com.google.inject', name: 'guice', version: '4.2.3'
     compile group: 'com.google.inject.extensions', name: 'guice-assistedinject', version: '4.0'
-
+    testImplementation 'org.mockito:mockito-core:2.7.22'
 }

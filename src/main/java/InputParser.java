@@ -17,6 +17,7 @@ public class InputParser {
         this.newLot = newLot;
         this.factory = factory;
     }
+
     public void getTheInputWords(String input) {
         this.wordsOfInput = Splitter.on(' ').trimResults().omitEmptyStrings().splitToList(input);
     }
@@ -34,7 +35,7 @@ public class InputParser {
                 break;
             case "park":
                 checkPositionIndex(
-                        1,
+                        2,
                         this.wordsOfInput.size(),
                         "IndexOufBound Error !!" + "Please provide both registration Number and color");
                 String registrationNum = this.wordsOfInput.get(1);

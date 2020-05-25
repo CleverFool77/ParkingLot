@@ -13,7 +13,7 @@ public class CarImpl implements Car {
     public CarImpl(@Assisted("regNum") String registrationNum,@Assisted("color") String color) {
         this.registrationNum = registrationNum;
         this.color = color;
-        System.out.println("kdjhfjfhsjf");
+        //System.out.println("kdjhfjfhsjf");
     }
 
     @Override

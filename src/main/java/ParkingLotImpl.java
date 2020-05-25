@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.ArrayList;
@@ -24,30 +23,37 @@ public class ParkingLotImpl implements ParkingLot{
         this.assignCarToSlots =  HashBiMap.create();
     }
 
+    @Override
     public int getCapacitySize() {
         return this.capacitySize;
     }
 
+    @Override
     public ArrayList<Integer> getEmptySlots() {
         return this.emptySlots;
     }
 
+    @Override
     public HashBiMap<Integer, Car> getAssignCarToSlots() {
         return this.assignCarToSlots;
     }
 
+    @Override
     public void setCapacitySize(Integer capacitySize) {
         this.capacitySize = checkNotNull(capacitySize);
     }
 
+    @Override
     public void setEmptySlots(ArrayList<Integer> emptySlots) {
         this.emptySlots = checkNotNull(emptySlots);
     }
 
+    @Override
     public void setAssignCarToSlots(HashBiMap<Integer, Car> assignCarToSlots) {
         this.assignCarToSlots = checkNotNull(assignCarToSlots);
     }
 
+    @Override
     public void createParkingLot(Integer capacitySize) {
         if(capacitySize == 0 ) {
             System.out.println("parking Lot is already created");
@@ -86,7 +92,7 @@ public class ParkingLotImpl implements ParkingLot{
 
     @Override
     public void unParkCar(Integer slotNumber) {
-        System.out.println("I'm inside unpark");
+        //System.out.println("I'm inside unpark");
         if (this.capacitySize == 0) {
             System.out.println("Parking lot is not created");
         } else if (this.assignCarToSlots.size() == 0) {
@@ -154,7 +160,7 @@ public class ParkingLotImpl implements ParkingLot{
                     + assignedLot.getValue().getRegistrationNum() + " "
                     + assignedLot.getValue().getColor());
         }
-        System.out.println("sjfhjfkhsk");
+        //System.out.println("sjfhjfkhsk");
     }
 
 }
