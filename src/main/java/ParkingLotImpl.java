@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +22,7 @@ public class ParkingLotImpl implements ParkingLot{
 
     @Inject
     public ParkingLotImpl(Integer capacitySize) {
-        this.capacitySize = checkNotNull(capacitySize);
+        this.capacitySize = capacitySize;
         this.emptySlots = Lists.newArrayList();
         this.assignCarToSlots =  HashBiMap.create();
     }
@@ -45,17 +44,17 @@ public class ParkingLotImpl implements ParkingLot{
 
     @Override
     public void setCapacitySize(Integer capacitySize) {
-        this.capacitySize = checkNotNull(capacitySize);
+        this.capacitySize = capacitySize;
     }
 
     @Override
     public void setEmptySlots(ArrayList<Integer> emptySlots) {
-        this.emptySlots = checkNotNull(emptySlots);
+        this.emptySlots = emptySlots;
     }
 
     @Override
     public void setAssignCarToSlots(HashBiMap<Integer, Car> assignCarToSlots) {
-        this.assignCarToSlots = checkNotNull(assignCarToSlots);
+        this.assignCarToSlots = assignCarToSlots;
     }
 
     @Override

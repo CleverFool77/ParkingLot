@@ -3,8 +3,6 @@ import com.google.inject.Singleton;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /*
 * @class  Car helps us create
 * an object of car that is
@@ -33,12 +31,12 @@ public class CarImpl implements Car {
 
     @Override
     public void setRegistrationNum(String registrationNum) {
-        this.registrationNum = checkNotNull(registrationNum);
+        this.registrationNum = registrationNum;
     }
 
     @Override
     public void setColor(String color) {
-        this.color = checkNotNull(color);
+        this.color = color;
     }
 
 }
