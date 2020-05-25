@@ -1,6 +1,7 @@
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.junit.Assert;
+import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class InputParserTester {
     @Mock
     InputParser inputParser = injector.getInstance(InputParser.class);
 
+    @Test
     public void testInputToWordsFunction() {
         inputParser.parseTheInputWords("Hello World");
         List<String> words = inputParser.getTheInputWords();
