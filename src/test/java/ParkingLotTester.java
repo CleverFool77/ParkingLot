@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.junit.jupiter.api.DisplayName;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
@@ -25,6 +26,7 @@ public class ParkingLotTester {
     //Car car = injector.getInstance(Car.class);
 
     @Test
+    @DisplayName("Test to create parking lot")
     public void testCreateParkingLot() {
         newLot.createParkingLot(1);
         Assert.assertEquals(newLot.getCapacitySize(),1);
@@ -32,6 +34,7 @@ public class ParkingLotTester {
     }
 
     @Test
+    @DisplayName("Test to Park")
     public void testParkCar(){
         newLot.createParkingLot(1);
         newLot.park(car);
@@ -40,6 +43,7 @@ public class ParkingLotTester {
     }
 
     @Test
+    @DisplayName("Test to Unpark")
     public void testUnPark(){
         newLot.createParkingLot(1);
         newLot.park(car);
@@ -51,6 +55,7 @@ public class ParkingLotTester {
     }
 
     @Test
+    @DisplayName("Test to check status")
     public void teststatus() {
         newLot.createParkingLot(1);
         newLot.park(car);
@@ -62,6 +67,7 @@ public class ParkingLotTester {
     }
 
     @Test
+    @DisplayName("Test to return registration Num on given color")
     public void testRegistrationNumWithColor() {
         newLot.createParkingLot(1);
         newLot.park(car);
@@ -73,6 +79,7 @@ public class ParkingLotTester {
     }
 
     @Test
+    @DisplayName("Test to return Slot Number on given color")
     public void testSlotNumWithColor() {
         newLot.createParkingLot(1);
         newLot.park(car);
@@ -84,6 +91,7 @@ public class ParkingLotTester {
     }
 
     @Test
+    @DisplayName("Test to return Slot Number on given registration Num")
     public void testSlotNumsWithResistrationNum() {
         newLot.createParkingLot(1);
         newLot.park(car);
