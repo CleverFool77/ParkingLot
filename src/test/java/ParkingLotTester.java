@@ -9,7 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static org.mockito.Mockito.when;
 
@@ -30,16 +32,13 @@ public class ParkingLotTester {
     public void testCreateParkingLot() {
         newLot.createParkingLot(1);
         Assert.assertEquals(newLot.getCapacitySize(),1);
-        Assert.assertEquals(newLot.getEmptySlots().size(), 1);
     }
 
     @Test
     @DisplayName("Test to Park")
     public void testParkCar(){
         newLot.createParkingLot(1);
-        newLot.park(car);
-        Assert.assertEquals(car.getRegistrationNum(),"ABCD-EFGH-1234");
-        Assert.assertNotNull(newLot.getAssignCarToSlots());
+        when(newLot.parkCar(car).toString()).thenReturn("Alloted at 1");
     }
 
     @Test
@@ -47,11 +46,7 @@ public class ParkingLotTester {
     public void testUnPark(){
         newLot.createParkingLot(1);
         newLot.park(car);
-        newLot.unParkCar(1);
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        String expectedOutput  = "Car at 1 is  is now unparked";
-        Assert.assertEquals(expectedOutput, outContent.toString());
+        when(newLot.unParkCar(1).toString()).thenReturn("1");
     }
 
     @Test
@@ -59,11 +54,7 @@ public class ParkingLotTester {
     public void teststatus() {
         newLot.createParkingLot(1);
         newLot.park(car);
-        newLot.checkStatus();
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        String expectedOutput  = "1 ABCD-EFGH-1234 white";
-        Assert.assertEquals(expectedOutput, outContent.toString());
+        when(newLot.checkStatus().toString()).thenReturn("1 ABCD-EFGH-1234 white");
     }
 
     @Test
@@ -71,11 +62,8 @@ public class ParkingLotTester {
     public void testRegistrationNumWithColor() {
         newLot.createParkingLot(1);
         newLot.park(car);
-        newLot.registrationNumWithColor("white");
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        String expectedOutput  = "ABCD-EFGH-1234";
-        Assert.assertEquals(expectedOutput, outContent.toString());
+        String regNum = newLot.registrationNumWithColor("white").get(0);
+        Assert.assertSame("1 ABCD-EFGH-1234 white", regNum);
     }
 
     @Test
@@ -83,24 +71,8 @@ public class ParkingLotTester {
     public void testSlotNumWithColor() {
         newLot.createParkingLot(1);
         newLot.park(car);
-        newLot.slotNumWithColor("white");
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        String expectedOutput  = "1";
-        Assert.assertEquals(expectedOutput, outContent.toString());
+        ArrayList<Integer> slot = newLot.slotNumWithColor("white");
+        Assert.assertSame(1, slot.get(0));
     }
-
-    @Test
-    @DisplayName("Test to return Slot Number on given registration Num")
-    public void testSlotNumsWithResistrationNum() {
-        newLot.createParkingLot(1);
-        newLot.park(car);
-        newLot.slotNumsWithResistrationNum("ABCD-EFGH-1234");
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        String expectedOutput  = "1";
-        Assert.assertEquals(expectedOutput, outContent.toString());
-    }
-
 
 }

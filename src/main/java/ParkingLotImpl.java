@@ -68,30 +68,33 @@ public class ParkingLotImpl implements ParkingLot{
     }
 
     @Override
-    public void park(Car car) {
+    public Integer park(Car car) {
         if (this.capacitySize == 0) {
             System.out.println("Sorry, parking lot is not created yet");
         } else if (this.emptySlots.isEmpty()) {
             System.out.println("Sorry, parking lot is full");
         } else {
-            parkCar(car);
+            return parkCar(car);
         }
+    System.out.println("dajkfjf");
+        return -1;
     }
 
     @Override
-    public void parkCar(Car car) {
+    public Integer parkCar(Car car) {
         Collections.sort(this.emptySlots);
         Integer emptylot = this.emptySlots.get(0);
         Car newCar = car;
         if  (!this.assignCarToSlots.containsKey(emptylot)) {
             this.assignCarToSlots.put(emptylot, newCar);
-            System.out.println("Allocated slot number : " + emptylot);
             this.emptySlots.remove(0);
+            return emptylot;
         }
+        return -1;
     }
 
     @Override
-    public void unParkCar(Integer slotNumber) {
+    public Integer unParkCar(Integer slotNumber) {
         //System.out.println("I'm inside unpark");
         if (this.capacitySize == 0) {
             System.out.println("Parking lot is not created");
@@ -103,17 +106,18 @@ public class ParkingLotImpl implements ParkingLot{
                 if (unparkthisCar != null) {
                     this.assignCarToSlots.remove(slotNumber);
                     this.emptySlots.add(slotNumber);
-                    System.out.println("Car at " + slotNumber + " is now unparked");
+                    return slotNumber;
                 }
             } else {
                 System.out.println("Slot Number is already unassigned or unempty");
             }
 
         }
+        return -1;
     }
 
     @Override
-    public void registrationNumWithColor(String color) {
+    public ArrayList<String> registrationNumWithColor(String color) {
         Collection<Car> carList = this.assignCarToSlots.values();
         ArrayList<String> registrationNumList = new ArrayList<>();
         for (Car oneCar : carList) {
@@ -125,9 +129,7 @@ public class ParkingLotImpl implements ParkingLot{
             System.out.println("No Car or registration Number with " +
                     "particular color is found");
         }
-        for (String oneRegNum : registrationNumList) {
-            System.out.println(oneRegNum);
-        }
+        return registrationNumList;
     }
 
     @Override
@@ -140,7 +142,7 @@ public class ParkingLotImpl implements ParkingLot{
     }
 
     @Override
-    public void slotNumWithColor(String Color) {
+    public ArrayList<Integer> slotNumWithColor(String Color) {
         ArrayList<Integer> slotNumWithColorList = new ArrayList<>();
         this.assignCarToSlots.forEach((key, value) -> {
             if (value.getColor().equals(Color)) {
@@ -148,19 +150,23 @@ public class ParkingLotImpl implements ParkingLot{
                 // System.out.println("Registration Number" + key);
             }
         });
-        for (Integer oneslotNum : slotNumWithColorList) {
-            System.out.println(oneslotNum);
-        }
+        return slotNumWithColorList;
     }
 
     @Override
-    public void checkStatus() {
-        for (Map.Entry<Integer, Car> assignedLot : this.assignCarToSlots.entrySet()) {
-            System.out.println(assignedLot.getKey() + " "
-                    + assignedLot.getValue().getRegistrationNum() + " "
-                    + assignedLot.getValue().getColor());
+    public ArrayList<String> checkStatus() {
+        ArrayList<String> statusList = new ArrayList<>();
+        if(this.assignCarToSlots.isEmpty()) {
+            System.out.println("Empty Parking Lot !!");
+        } else {
+            for (Map.Entry<Integer, Car> assignedLot : this.assignCarToSlots.entrySet()) {
+                statusList.add(assignedLot.getKey().toString() + " "
+                        + assignedLot.getValue().getRegistrationNum() + " "
+                        + assignedLot.getValue().getColor());
+            }
         }
-        //System.out.println("sjfhjfkhsk");
+
+        return statusList;
     }
 
 }
