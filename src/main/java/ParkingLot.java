@@ -35,5 +35,5 @@ public abstract interface ParkingLot {
 	public ArrayList<Integer> slotNumWithColor(String Color);
 
 	public ArrayList<String> checkStatus();
-	
+
 }
