@@ -35,16 +35,5 @@ public abstract interface ParkingLot {
 	public ArrayList<Integer> slotNumWithColor(String Color);
 
 	public ArrayList<String> checkStatus();
-
-	class ParkingLotModule extends AbstractModule {
-
-		@Override
-		protected void configure() {}
-
-		@Provides
-		public ParkingLot provideParkingLot() {
-			ParkingLot parkingLot = new ParkingLotImpl(0);
-			return parkingLot;
-		}
-	}
+	
 }
