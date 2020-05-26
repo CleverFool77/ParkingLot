@@ -1,4 +1,7 @@
-.idea/
+#Ide and Gradle
+idea/
 .gradle/
+
+#Ignore JavaBytecode
 *.class
 
