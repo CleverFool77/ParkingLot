@@ -11,13 +11,13 @@ import java.util.List;
 @DisplayName("Test on Input Parser Tester")
 public class InputParserTester {
 
-    Injector injector = Guice.createInjector(new ParkingLot.ParkingLotModule(), new InputParser.CarModule());
+    Injector injector = Guice.createInjector(new CarModule.ParkingLot.ParkingLotModule(), new InputParser.CarModule());
 
     @InjectMocks
     InputParser inputParser = injector.getInstance(InputParser.class);
 
     @Mock
-    ParkingLot newLot = injector.getInstance(ParkingLot.class);
+    CarModule.ParkingLot newLot = injector.getInstance(CarModule.ParkingLot.class);
 
     @Test
     @DisplayName("test on InputCommand function of parser")

@@ -1,6 +1,6 @@
-# ParkingLot
+# CarModule.ParkingLot
 
-### Implementation of ParkingLot problem using Java, Google guice, guava and tested using Junit-Mockito.
+### Implementation of CarModule.ParkingLot problem using Java, Google guice, guava and tested using Junit-Mockito.
 
 ## Problem Statement
 I own a parking lot that can hold up to &#39;n&#39; cars at any given point in time. Each slot is

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 @RunWith(MockitoJUnitRunner.class)
 public class ParkingLotTester {
 
-    Injector injector = Guice.createInjector(new ParkingLot.ParkingLotModule(),new InputParser.CarModule());
+    Injector injector = Guice.createInjector(new CarModule.ParkingLot.ParkingLotModule(),new InputParser.CarModule());
     @InjectMocks
-    private ParkingLot newLot = injector.getInstance(ParkingLot.class);
+    private CarModule.ParkingLot newLot = injector.getInstance(CarModule.ParkingLot.class);
 
     @Spy
     private Car car = new CarImpl("ABCD-EFGH-1234", "white");

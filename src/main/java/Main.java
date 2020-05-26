@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /*
 * <h1> Hello <h1>
-* Implementation of ParkingLot problem using Java, Google guice,
+* Implementation of CarModule.ParkingLot problem using Java, Google guice,
 * guava and tested using Junit-Mockito.
 * @author Lekhika Dugtal
 * */
@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		Injector injector = Guice.createInjector(new ParkingLot.ParkingLotModule(), new InputParser.CarModule());
+		Injector injector = Guice.createInjector(new ParkingLotModule(), new CarModule());
 		InputParser inputParser = injector.getInstance(InputParser.class);
 
 		System.out.println("Hello !! \n" +

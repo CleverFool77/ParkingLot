@@ -8,43 +8,43 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract interface ParkingLot {
 
-    public int getCapacitySize();
+	public int getCapacitySize();
 
-    public ArrayList<Integer> getEmptySlots();
+	public ArrayList<Integer> getEmptySlots();
 
-    public HashBiMap<Integer, Car> getAssignCarToSlots();
+	public HashBiMap<Integer, Car> getAssignCarToSlots();
 
-    public void setCapacitySize(Integer capacitySize);
+	public void setCapacitySize(Integer capacitySize);
 
-    public void setEmptySlots(ArrayList<Integer> emptySlots);
+	public void setEmptySlots(ArrayList<Integer> emptySlots);
 
-    public void setAssignCarToSlots(HashBiMap<Integer, Car> assignCarToSlots);
+	public void setAssignCarToSlots(HashBiMap<Integer, Car> assignCarToSlots);
 
-    public void createParkingLot(Integer capacitySize);
+	public void createParkingLot(Integer capacitySize);
 
-    public Integer park(Car car);
+	public Integer park(Car car);
 
-    public Integer parkCar(Car car);
+	public Integer parkCar(Car car);
 
-    public Integer unParkCar(Integer slotNumber);
+	public Integer unParkCar(Integer slotNumber);
 
-    public ArrayList<String> registrationNumWithColor(String color);
+	public ArrayList<String> registrationNumWithColor(String color);
 
-    public void slotNumsWithResistrationNum(String registrationNum);
+	public void slotNumsWithResistrationNum(String registrationNum);
 
-    public ArrayList<Integer> slotNumWithColor(String Color);
+	public ArrayList<Integer> slotNumWithColor(String Color);
 
-    public ArrayList<String> checkStatus();
+	public ArrayList<String> checkStatus();
 
-    class ParkingLotModule extends AbstractModule {
+	class ParkingLotModule extends AbstractModule {
 
-        @Override
-        protected void configure() {}
+		@Override
+		protected void configure() {}
 
-        @Provides
-        public ParkingLot provideParkingLot() {
-            ParkingLot parkingLot = new ParkingLotImpl(0);
-            return parkingLot;
-        }
-    }
+		@Provides
+		public ParkingLot provideParkingLot() {
+			ParkingLot parkingLot = new ParkingLotImpl(0);
+			return parkingLot;
+		}
+	}
 }
