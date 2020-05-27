@@ -1,4 +1,5 @@
-#Ide and Gradle
+#Ide
+# Gradle
 .idea/
 .gradle/
 
