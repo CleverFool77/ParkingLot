@@ -1,5 +1,5 @@
 #Ide and Gradle
-idea/
+.idea/
 .gradle/
 
 #Ignore JavaBytecode

@@ -12,6 +12,7 @@ import java.util.Scanner;
 * Implementation of CarModule.ParkingLot problem using Java, Google guice,
 * guava and tested using Junit-Mockito.
 * @author Lekhika Dugtal
+* @Year 2020
 * */
 
 public class Main {
