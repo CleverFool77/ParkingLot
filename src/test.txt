@@ -1,0 +1,12 @@
+create_parking_lot 3
+park ABCD-EFGH-1234 white
+park QWER-TYUI-1234 red
+status
+park ZXCV-VBNM-6789 pink
+park ASDF-FGHJ-1234 white
+status
+leave 2
+status
+slot_number_for_registration_number ZXCV-VBNM-6789
+slot_number_for_color white
+status
