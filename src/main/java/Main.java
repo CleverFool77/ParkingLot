@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /*
-* <h1> Hello <h1>
 * Implementation of CarModule.ParkingLot problem using Java, Google guice,
 * guava and tested using Junit-Mockito.
 * @author Lekhika Dugtal
